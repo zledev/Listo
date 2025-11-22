@@ -1,16 +1,17 @@
 import { useEffect, type ReactNode } from "react";
 
-import { useState } from "react";
+
+// Commented for Github Pages Deploymen (Does not affect the codebase)
+// import { useState } from "react";
 
 function TaskManager(
 	{ status, call_newlist }: { status: string; call_newlist: React.Dispatch<React.SetStateAction<boolean>>; }
 ): ReactNode {
-	const [selected, update_selected] = useState<string>("");
+	// const [selected, update_selected] = useState<string>("");
 
 	useEffect(() => {
 		if (status.length == 0) return;
-
-		update_selected(status);
+		// update_selected(status);
 	}, [status]);
 
 	return (
