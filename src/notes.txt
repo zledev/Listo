@@ -1,0 +1,21 @@
+1. useState - Your main workhorse
+
+Store the list of todos
+Track input field value
+Handle filter states (all/active/completed)
+Manage edit mode
+
+2. useEffect - For persistence
+
+Save todos to localStorage whenever they change
+Load saved todos when app starts
+
+3. useRef (optional but helpful)
+
+Auto-focus input fields
+Focus edit inputs when editing a todo
+
+4. useCallback (optional, for optimization)
+
+Prevent unnecessary re-renders when passing functions to child components
+Only needed if you split your app into multiple components
