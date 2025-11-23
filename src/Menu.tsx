@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState, type ReactNode } from "react";
-import bin from "./assets/bin.svg";
 
 function Menu({
 	show_list_data,

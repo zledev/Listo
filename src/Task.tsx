@@ -9,7 +9,7 @@ function TaskManager({
 	selected_task: string;
 	call_newlist: React.Dispatch<React.SetStateAction<boolean>>;
 }): ReactNode {
-	const [selected, update_selected] = useState<string>("");
+	// const [selected, update_selected] = useState<string>("");
 	const [update_status, call_update] = useState<boolean>(false);
 	const render_update = () => {
 		call_update(update_status ? false : true);
@@ -26,7 +26,7 @@ function TaskManager({
 
 	useEffect(() => {
 		if (status.length == 0) return;
-		update_selected(status);
+		//update_selected(status);
 	}, [status]);
 
 	return (
