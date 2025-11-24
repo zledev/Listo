@@ -30,7 +30,7 @@ function Menu({
 	useEffect(() => {
 		let x: string | null = localStorage.getItem("list-tracker");
 		if (x == null) {
-			localStorage.setItem("list-tracker", "1");
+			localStorage.setItem("list-tracker", "0");
 			return;
 		}
 
@@ -38,12 +38,17 @@ function Menu({
 	}, []);
 
 	const updateList = (val: number) => {
-		let list_data: string[] = [];
-		for (let i = 0; i < val; i++) {
-			list_data.push(localStorage.getItem("list-" + `${i}`)!);
-		}
+		if (val - list.length > 0) {
+			let list_data: string[] = [];
 
-		add_list([...list_data]);
+			for (let i = 0; i < val; i++) {
+				list_data.push(
+					localStorage.getItem("list-" + `${i + 1 + list.length}`)!
+				);
+			}
+
+			add_list(list.concat(list_data));
+		}
 	};
 
 	return (
@@ -72,8 +77,10 @@ function Menu({
 				<div className="grid">
 					<div className="flex justify-center mt-2">
 						<ul>
-							{list.map(
-								(x: string, index: number) =>
+							{list.map((x: string, index: number) => {
+								index++;
+
+								return (
 									x !== null && (
 										<li
 											className={`w-10.5 p-2 mt-4 text-center bg-gray-300 
@@ -89,7 +96,8 @@ function Menu({
 											{x.charAt(0)}
 										</li>
 									)
-							)}
+								);
+							})}
 						</ul>
 					</div>
 
@@ -154,9 +162,11 @@ function Menu({
 				</div>
 				<div>
 					<ul>
-						{list.map(
-							(x: string, index: number) =>
-								index !== 0 && (
+						{list.map((x: string, index: number) => {
+							index++;
+
+							return (
+								x != null && (
 									<li
 										key={index}
 										id={`${index}`}
@@ -171,7 +181,8 @@ function Menu({
 										{x}
 									</li>
 								)
-						)}
+							);
+						})}
 					</ul>
 					<div
 						onBlur={(e) => {
@@ -198,15 +209,20 @@ function Menu({
 										tracker = "0";
 									}
 
+									let val: number = Number(tracker);
+									localStorage.setItem("list-tracker", `${++val}`);
+
 									localStorage.setItem(
-										"list-" + tracker,
+										"list-" + val.toString(),
 										e.currentTarget.value
 									);
 
-									let val: number = Number(tracker);
-									localStorage.setItem("list-tracker", `${++val}`);
 									updateList(val);
 									e.currentTarget.value = "";
+									localStorage.setItem(
+										"list-" + val.toString() + "-task_tracker",
+										"0"
+									);
 								}
 							}}></input>
 
